@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="webinos" default="debug" basedir=".../..">
+<project name="webinos" default="debug" basedir="./">
 
 	<!-- ANDROID_HOME and ANODE_ROOT environment variables must be defined -->
 
@@ -9,19 +9,21 @@
 		<zip destfile="${basedir}/app/assets/modules/webinos.zip">
 			<zipfileset dir="${basedir}"
 			includes="
-                config.json,
-				node_modules/webinos-pzp/" 
+				node_modules/webinos-pzp/,
+				node_modules/webinos-widget/"
 			excludes="
 				**/build/,
 				**/deps/,
-				**/.gitignore" />
+				**/.gitignore,
+				node_modules/webinos-pzp/node_modules/webinos-certificateHandler/node_modules/certificate_manager.node"/>
 		</zip>
 
                 <!-- Creates webinos/web_root/webinos.js
                 <ant dir="${basedir}/webinos" target="gen-webinos-js" /> -->
 
-                <!-- Copies webinos/web_root/webinos.js to wrt/assets folder -->
-                <copy file="${basedir}/node_modules/webinos-pzp/web_root/webinos.js" todir="${basedir}/wrt/assets/js" />
+		<!-- Copies webinos/web_root/webinos.js to wrt/assets folder -->
+		<copy file="${basedir}/node_modules/webinos-pzp/web_root/webinos.js" todir="${basedir}/wrt/assets/js" />
+        <copy file="app/assets/modules/certificate_manager.node" todir="node_modules/webinos-pzp/node_modules/webinos-certificateHandler/node_modules" force="true" overwrite="true"/>
 	</target>
 
 	<target name="gen-webinos-clean">
